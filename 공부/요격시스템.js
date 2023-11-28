@@ -32,6 +32,8 @@ console.log(
 function solution(targets) {
   let fireCount = 1;
   targets.sort((a, b) => b[0] - a[0]);
+  console.log(targets);
+
   let s = targets[0][0];
   for (const target of targets) {
     const [currentS, currentE] = target;
@@ -45,7 +47,7 @@ function solution(targets) {
 
 function solution2(targets) {
   let fireCount = 1;
-  targets.sort((a, b) => a[0] - b[0]);
+  targets.sort((a, b) => a[1] - b[1]);
   console.log(targets);
   let [s, e] = targets.shift();
 
@@ -69,5 +71,30 @@ console.log(
     [1, 2],
     [2, 3],
     [0, 99999],
+  ])
+);
+
+function corruptSolution(targets) {
+  let fireCount = 1;
+  targets.sort((a, b) => a[0] - b[0]);
+  let [s, e] = targets.shift();
+
+  for (const target of targets) {
+    const [currentS, currentE] = target;
+    if (currentS >= e) {
+      fireCount += 1;
+      e = currentE;
+    }
+  }
+
+  return fireCount;
+}
+
+console.log(
+  corruptSolution([
+    [1, 2],
+    [3, 100],
+    [4, 5],
+    [6, 7],
   ])
 );
